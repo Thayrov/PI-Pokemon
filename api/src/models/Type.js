@@ -2,7 +2,7 @@ const {DataTypes} = require('sequelize');
 
 module.exports = sequelize => {
   sequelize.define(
-    'Pokemon',
+    'Type',
     {
       name: {
         type: DataTypes.STRING,
@@ -10,7 +10,7 @@ module.exports = sequelize => {
       },
     },
     {
-      tableName: 'pokemons',
+      tableName: 'types',
       timestamps: false,
     },
   );
