@@ -1,0 +1,59 @@
+// https://dbdiagram.io/d/pokemon_db-65a5f224ac844320aefcb0f9
+
+Table pokemon {
+  id UUID [pk] // Clave primaria
+  name varchar // Nombre del pokemon
+  image varchar // URL de la imagen del pokemon
+  hp int // Vida del pokemon
+  attack int // Ataque del pokemon
+  special_attack int // Ataque especial del pokemon
+  defense int // Defensa del pokemon
+  special_defense int // Defensa especial del pokemon
+  speed int // Velocidad del pokemon
+  height int // Altura del pokemon
+  weight int // Peso del pokemon
+}
+
+Table ability {
+  id UUID [pk] // Clave primaria
+  name varchar // Nombre de la habilidad
+}
+
+Table pokemon_ability {
+  id int [pk, increment] // Clave primaria, autoincrementable
+  pokemon_id UUID [ref: > pokemon.id] // Referencia al ID de Pokemon
+  ability_id UUID [ref: > ability.id] // Referencia al ID de la habilidad
+}
+
+Table move {
+  id UUID [pk] // Clave primaria
+  name varchar // Nombre del movimiento
+}
+
+Table pokemon_move {
+  id int [pk, increment] // Clave primaria, autoincrementable
+  pokemon_id UUID [ref: > pokemon.id] // Referencia al ID de Pokemon
+  move_id UUID [ref: > move.id] // Referencia al ID del movimiento
+}
+
+Table type {
+  id UUID [pk] // Clave primaria
+  name varchar // Nombre del tipo de pokemon
+  icon varchar // Icono del tipo de pokemon
+  image varchar // Imagen del tipo de pokemon
+}
+
+Table type_relationship {
+  type_id UUID [ref: > type.id] // Referencia al ID de Type
+  related_type_id UUID [ref: > type.id] // Referencia al ID del Type relacionado
+  relationship_type varchar // Tipo de relación (ej. 'double_damage_to')
+  indexes {
+  (type_id, related_type_id, relationship_type) [pk]
+  }
+}
+
+Table pokemon_type {
+  id int [pk, increment] // Clave primaria, autoincrementable
+  pokemon_id int [ref: > pokemon.id] // Referencia al ID de Pokemon
+  type_id int [ref: > type.id] // Referencia al ID de Type
+}
