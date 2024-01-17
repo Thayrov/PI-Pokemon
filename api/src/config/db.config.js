@@ -3,6 +3,8 @@ const {DB_CONN_STRING} = require('./env.config');
 const {Sequelize} = require('sequelize');
 const PokemonModel = require('../models/Pokemon');
 const TypeModel = require('../models/Type');
+const AbilityModel = require('../models/Ability');
+const MoveModel = require('../models/Move');
 
 let dialectOptionsByEnv = {};
 
@@ -25,11 +27,19 @@ const sequelize = new Sequelize(DB_CONN_STRING, {
 
 PokemonModel(sequelize);
 TypeModel(sequelize);
+AbilityModel(sequelize);
+MoveModel(sequelize);
 
-const {Pokemon, Type} = sequelize.models;
+const {Pokemon, Type, Ability, Move} = sequelize.models;
 
-Pokemon.belongsToMany(Type, {through: 'type_pokemon'});
-Type.belongsToMany(Pokemon, {through: 'type_pokemon'});
+Pokemon.belongsToMany(Type, {through: 'pokemon_type'});
+Type.belongsToMany(Pokemon, {through: 'pokemon_type'});
+
+Pokemon.belongsToMany(Ability, {through: 'pokemon_ability'});
+Ability.belongsToMany(Pokemon, {through: 'pokemon_ability'});
+
+Pokemon.belongsToMany(Move, {through: 'pokemon_move'});
+Move.belongsToMany(Pokemon, {through: 'pokemon_move'});
 
 module.exports = {
   ...sequelize.models,
