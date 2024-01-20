@@ -80,36 +80,39 @@ const getPokemonByName = async (req, res) => {
   try {
     const name = req.query.name?.toLowerCase();
 
+    // Buscar en la base de datos
     let pokemons = await Pokemon.findAll({
-      where: Sequelize.where(
-        Sequelize.fn('lower', Sequelize.col('name')),
-        Sequelize.fn('lower', name),
-      ),
+      where: {
+        name: {
+          [Sequelize.Op.iLike]: `%${name}%`,
+        },
+      },
     });
 
-    if (pokemons.length === 0) {
-      const response = await axios.get(`${API_URL}/pokemon?limit=1000`);
-      if (response.data.results) {
-        const filteredPokemons = response.data.results.filter(p => p.name.includes(name));
+    // Buscar en la API externa
+    const response = await axios.get(`${API_URL}/pokemon?limit=1032`);
+    if (response.data.results) {
+      const filteredPokemons = response.data.results.filter(p => p.name.includes(name));
 
-        for (const p of filteredPokemons) {
-          const detailedResponse = await axios.get(p.url);
-          const detailedData = detailedResponse.data;
+      for (const p of filteredPokemons) {
+        const detailedResponse = await axios.get(p.url);
+        const detailedData = detailedResponse.data;
 
-          let existingPokemon = await Pokemon.findOne({where: {id: detailedData.id}});
-          if (!existingPokemon) {
-            const newPokemonData = formatPokemonData(detailedData);
-            existingPokemon = await Pokemon.create(newPokemonData);
+        let existingPokemon = await Pokemon.findOne({where: {id: detailedData.id}});
+        if (!existingPokemon) {
+          const newPokemonData = formatPokemonData(detailedData);
+          existingPokemon = await Pokemon.create(newPokemonData);
 
-            const types = detailedData.types.map(typeInfo => typeInfo.type.name);
-            const abilities = detailedData.abilities.map(abilityInfo => abilityInfo.ability.name);
-            const moves = detailedData.moves.map(moveInfo => moveInfo.move.name);
+          const types = detailedData.types.map(typeInfo => typeInfo.type.name);
+          const abilities = detailedData.abilities.map(abilityInfo => abilityInfo.ability.name);
+          const moves = detailedData.moves.map(moveInfo => moveInfo.move.name);
 
-            await processTypes(types, existingPokemon);
-            await processAbilities(abilities, existingPokemon);
-            await processMoves(moves, existingPokemon);
-          }
+          await processTypes(types, existingPokemon);
+          await processAbilities(abilities, existingPokemon);
+          await processMoves(moves, existingPokemon);
+        }
 
+        if (!pokemons.find(poke => poke.id === existingPokemon.id)) {
           pokemons.push(existingPokemon);
         }
       }
@@ -126,4 +129,66 @@ const getPokemonByName = async (req, res) => {
   }
 };
 
-module.exports = {getPokemons, getPokemonDetail, getPokemonByName};
+const createPokemon = async (req, res) => {
+  try {
+    const {
+      name,
+      image,
+      hp,
+      attack,
+      special_attack,
+      defense,
+      special_defense,
+      speed,
+      height,
+      weight,
+      types,
+      abilities,
+      moves,
+    } = req.body;
+
+    // Determine the next custom ID
+    const lastCustomId = await Pokemon.max('id', {
+      where: {
+        id: {
+          [Sequelize.Op.gte]: 20000,
+        },
+      },
+    });
+
+    const nextCustomId = !isNaN(lastCustomId) && lastCustomId >= 20000 ? lastCustomId + 1 : 20000;
+
+    // Create the custom Pokemon
+    const newPokemon = await Pokemon.create({
+      id: nextCustomId,
+      name,
+      image,
+      hp,
+      attack,
+      special_attack,
+      defense,
+      special_defense,
+      speed,
+      height,
+      weight,
+    });
+
+    // Procesar y agregar tipos, habilidades y movimientos
+    if (types && types.length) {
+      await processTypes(types, newPokemon);
+    }
+    if (abilities && abilities.length) {
+      await processAbilities(abilities, newPokemon);
+    }
+    if (moves && moves.length) {
+      await processMoves(moves, newPokemon);
+    }
+
+    res.status(201).json(newPokemon);
+  } catch (error) {
+    console.error('Error creating new Pokemon:', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
+module.exports = {getPokemons, getPokemonDetail, getPokemonByName, createPokemon};
