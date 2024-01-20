@@ -5,6 +5,7 @@ const PokemonModel = require('../models/Pokemon');
 const TypeModel = require('../models/Type');
 const AbilityModel = require('../models/Ability');
 const MoveModel = require('../models/Move');
+const TypeRelationshipModel = require('../models/TypeRelationship');
 
 let dialectOptionsByEnv = {};
 
@@ -29,8 +30,9 @@ PokemonModel(sequelize);
 TypeModel(sequelize);
 AbilityModel(sequelize);
 MoveModel(sequelize);
+TypeRelationshipModel(sequelize);
 
-const {Pokemon, Type, Ability, Move} = sequelize.models;
+const {Pokemon, Type, Ability, Move, TypeRelationship} = sequelize.models;
 
 Pokemon.belongsToMany(Type, {through: 'pokemon_type'});
 Type.belongsToMany(Pokemon, {through: 'pokemon_type'});
@@ -40,6 +42,13 @@ Ability.belongsToMany(Pokemon, {through: 'pokemon_ability'});
 
 Pokemon.belongsToMany(Move, {through: 'pokemon_move'});
 Move.belongsToMany(Pokemon, {through: 'pokemon_move'});
+
+Type.belongsToMany(Type, {
+  as: 'RelatedTypes',
+  through: TypeRelationship,
+  foreignKey: 'typeId',
+  otherKey: 'relatedTypeId',
+});
 
 module.exports = {
   ...sequelize.models,

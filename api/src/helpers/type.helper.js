@@ -1,4 +1,4 @@
-const {Type} = require('../config/db.config');
+const {Type, TypeRelationship, conn} = require('../config/db.config');
 
 async function processTypes(typeNames, pokemon) {
   let typesPromises = typeNames.map(async typeName => {
@@ -109,6 +109,52 @@ function determineImageType(type) {
   );
 }
 
+const processDamageRelations = async (damageRelations, typeInstance) => {
+  const relationsPromises = Object.keys(damageRelations).flatMap(relationKey =>
+    damageRelations[relationKey].map(async relatedType => {
+      const [relatedTypeInstance] = await Type.findOrCreate({
+        where: {name: relatedType.name},
+      });
+
+      let transaction;
+      try {
+        transaction = await conn.transaction();
+
+        const relationExists = await TypeRelationship.findOne({
+          where: {
+            typeId: typeInstance.id,
+            relatedTypeId: relatedTypeInstance.id,
+            relationshipType: relationKey,
+          },
+          transaction,
+        });
+
+        if (!relationExists) {
+          await TypeRelationship.create(
+            {
+              typeId: typeInstance.id,
+              relatedTypeId: relatedTypeInstance.id,
+              relationshipType: relationKey,
+            },
+            {transaction},
+          );
+        }
+
+        await transaction.commit();
+      } catch (error) {
+        if (transaction) {
+          await transaction.rollback();
+        }
+      }
+    }),
+  );
+
+  return Promise.all(relationsPromises);
+};
+
 module.exports = {
   processTypes,
+  determineIconType,
+  determineImageType,
+  processDamageRelations,
 };
