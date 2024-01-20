@@ -4,20 +4,79 @@ module.exports = sequelize => {
   sequelize.define(
     'Pokemon',
     {
-      id: {
+      uuid: {
         type: DataTypes.UUID,
         primaryKey: true,
+        defaultValue: DataTypes.UUIDV4,
       },
-      name: DataTypes.STRING,
-      image: DataTypes.STRING,
-      hp: DataTypes.INTEGER,
-      attack: DataTypes.INTEGER,
-      special_attack: DataTypes.INTEGER,
-      defense: DataTypes.INTEGER,
-      special_defense: DataTypes.INTEGER,
-      speed: DataTypes.INTEGER,
-      height: DataTypes.INTEGER,
-      weight: DataTypes.INTEGER,
+      id: {
+        type: DataTypes.INTEGER,
+        unique: true,
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      image: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      hp: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          min: 0,
+        },
+      },
+      attack: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          min: 0,
+        },
+      },
+      special_attack: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          min: 0,
+        },
+      },
+      defense: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          min: 0,
+        },
+      },
+      special_defense: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          min: 0,
+        },
+      },
+      speed: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          min: 0,
+        },
+      },
+      height: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          min: 0,
+        },
+      },
+      weight: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          min: 0,
+        },
+      },
     },
     {
       tableName: 'pokemons',
