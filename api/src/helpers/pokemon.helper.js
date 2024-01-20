@@ -129,4 +129,5 @@ const formatPokemonForResponse = pokemon => {
 module.exports = {
   getPokemonsFromAPI,
   getPokemonsFromDB,
+  formatPokemonData,
 };
