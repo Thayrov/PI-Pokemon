@@ -4,10 +4,11 @@ import styled, {css} from 'styled-components';
 
 // eslint-disable-next-line
 export const theme = {
-  //  https://coolors.co/ef594f-ffd740-f6f7f8-e2e3e4-40413f-3d3d3c-302d2d
+  //  https://coolors.co/ef594f-ffd740-0a60af-f6f7f8-e2e3e4-40413f-3d3d3c-302d2d
   colors: {
     Bittersweet: '239, 89, 79',
     Mustard: '255, 215, 64',
+    Turquoise: '10, 96, 175',
     SeaSalt: '246, 247, 248',
     Platinum: '226, 227, 228',
     BlackOlive: '64, 65, 63',
@@ -76,5 +77,3 @@ export const BaseButton = styled.button`
 `;
 
 export const BaseInput = styled.input``;
-
-/* ############## ANIMATIONS ############## */

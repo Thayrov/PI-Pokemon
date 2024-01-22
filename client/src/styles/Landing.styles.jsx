@@ -10,6 +10,40 @@ export const Pokemon = styled.div`
   line-height: 200px;
   display: inline-block;
   margin-bottom: 20px;
+  animation: Shake 3s ease-in-out 1s infinite normal none;
+
+  @keyframes Shake {
+    0%,
+    100% {
+      transform: rotate(0deg);
+      transform-origin: 50% 100%;
+    }
+
+    10% {
+      transform: rotate(2deg);
+    }
+
+    20%,
+    40%,
+    60% {
+      transform: rotate(-4deg);
+    }
+
+    30%,
+    50%,
+    70% {
+      transform: rotate(4deg);
+    }
+
+    80% {
+      transform: rotate(-2deg);
+    }
+
+    90% {
+      transform: rotate(2deg);
+    }
+  }
+
   &::before {
     content: '';
     width: 200px;
@@ -47,6 +81,18 @@ export const Pokemon = styled.div`
     z-index: 2;
     margin: -41px 0 0 -41px;
     border: 18px solid rgba(${({theme: {colors}}) => colors.Jet}, 1);
+    animation: pulseAnimation 3s infinite ease-in-out;
+  }
+  @keyframes pulseAnimation {
+    0% {
+      background-color: rgba(${({theme: {colors}}) => colors.SeaSalt}, 1);
+    }
+    50% {
+      background-color: rgba(${({theme: {colors}}) => colors.Bittersweet}, 1);
+    }
+    100% {
+      background-color: rgba(${({theme: {colors}}) => colors.SeaSalt}, 1);
+    }
   }
 `;
 
