@@ -104,13 +104,6 @@ export const ButtonBackground = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: repeating-linear-gradient(
-    -45deg,
-    rgba(${({theme: {colors}}) => colors.BlackOlive}, 0.7),
-    rgba(${({theme: {colors}}) => colors.BlackOlive}, 0.7) 5px,
-    rgba(${({theme: {colors}}) => colors.Jet}, 0.7) 5px,
-    rgba(${({theme: {colors}}) => colors.Jet}, 0.7) 25px
-  );
 `;
 
 export const ButtonInfo = styled.div`

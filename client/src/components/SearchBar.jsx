@@ -1,6 +1,6 @@
 import {CustomInputContainer, Input, SvgIcon} from '../styles/SearchBar.styles';
 
-const CustomInput = () => {
+const SearchBar = () => {
   return (
     <CustomInputContainer>
       <SvgIcon xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'>
@@ -12,4 +12,4 @@ const CustomInput = () => {
   );
 };
 
-export default CustomInput;
+export default SearchBar;
