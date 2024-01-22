@@ -10,7 +10,7 @@ const spin = keyframes`
 `;
 
 export const LoaderContainer = styled.div`
-  margin: 0;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
