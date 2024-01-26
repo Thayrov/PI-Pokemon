@@ -4,7 +4,8 @@ export const CustomInputContainer = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-  max-width: 100%;
+  max-width: 60rem;
+  /* width: 100%; */
 `;
 
 export const Input = styled.input`
@@ -38,4 +39,13 @@ export const SvgIcon = styled.svg`
   fill: rgba(${({theme: {colors}}) => colors.Bittersweet}, 1);
   width: 18px;
   height: 18px;
+  cursor: pointer;
+
+  &:hover {
+    stroke: rgba(${({theme: {colors}}) => colors.Bittersweet}, 1);
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
 `;

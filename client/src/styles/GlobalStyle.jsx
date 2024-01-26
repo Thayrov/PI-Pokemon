@@ -13,6 +13,8 @@ const GlobalStyle = createGlobalStyle`
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden; 
+  height: 100vh;
+  background-attachment: fixed;
   background: repeating-linear-gradient(
     -45deg,
     rgba(${({theme: {colors}}) => colors.BlackOlive}, 0.7),

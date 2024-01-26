@@ -7,15 +7,18 @@ import {Landing} from './components/Landing.jsx';
 /* Routing */
 import {Routes, Route} from 'react-router-dom';
 import Home from './components/Home.jsx';
+import {AppContainer} from './styles/App.styles.jsx';
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Routes>
-        <Route path='/' element={<Landing />} />
-        <Route path='/home' element={<Home />} />
-      </Routes>
+      <AppContainer>
+        <Routes>
+          <Route path='/' element={<Landing />} />
+          <Route path='/home' element={<Home />} />
+        </Routes>
+      </AppContainer>
     </ThemeProvider>
   );
 };
