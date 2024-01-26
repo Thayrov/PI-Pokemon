@@ -14,7 +14,7 @@ const {Sequelize} = require('sequelize');
 const getPokemons = async (req, res) => {
   try {
     const offset = parseInt(req.query.offset, 10) || 0;
-    const limit = parseInt(req.query.limit, 10) || 20;
+    const limit = parseInt(req.query.limit, 10) || 12;
 
     let data;
     const {count, rows: existingPokemons} = await Pokemon.findAndCountAll({
@@ -39,16 +39,10 @@ const getPokemons = async (req, res) => {
 const getPokemonDetail = async (req, res) => {
   try {
     const idPokemon = req.params.idPokemon;
-    let pokemon;
-    if (isNaN(parseInt(idPokemon))) {
-      pokemon = await Pokemon.findOne({
-        where: {name: idPokemon},
-      });
-    } else {
-      pokemon = await Pokemon.findOne({
-        where: {id: idPokemon},
-      });
-    }
+
+    let pokemon = await Pokemon.findOne({
+      where: {id: idPokemon},
+    });
 
     if (!pokemon) {
       const response = await axios.get(`${API_URL}/pokemon/${idPokemon}`);
@@ -80,7 +74,6 @@ const getPokemonByName = async (req, res) => {
   try {
     const name = req.query.name?.toLowerCase();
 
-    // Buscar en la base de datos
     let pokemons = await Pokemon.findAll({
       where: {
         name: {
@@ -89,10 +82,9 @@ const getPokemonByName = async (req, res) => {
       },
     });
 
-    // Buscar en la API externa
     const response = await axios.get(`${API_URL}/pokemon?limit=1032`);
     if (response.data.results) {
-      const filteredPokemons = response.data.results.filter(p => p.name.includes(name));
+      const filteredPokemons = response.data.results.filter(p => p.name.toLowerCase() === name);
 
       for (const p of filteredPokemons) {
         const detailedResponse = await axios.get(p.url);
@@ -147,7 +139,6 @@ const createPokemon = async (req, res) => {
       moves,
     } = req.body;
 
-    // Determine the next custom ID
     const lastCustomId = await Pokemon.max('id', {
       where: {
         id: {
@@ -158,7 +149,6 @@ const createPokemon = async (req, res) => {
 
     const nextCustomId = !isNaN(lastCustomId) && lastCustomId >= 20000 ? lastCustomId + 1 : 20000;
 
-    // Create the custom Pokemon
     const newPokemon = await Pokemon.create({
       id: nextCustomId,
       name,
@@ -173,7 +163,6 @@ const createPokemon = async (req, res) => {
       weight,
     });
 
-    // Procesar y agregar tipos, habilidades y movimientos
     if (types && types.length) {
       await processTypes(types, newPokemon);
     }
