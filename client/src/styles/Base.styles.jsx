@@ -16,7 +16,7 @@ export const theme = {
     Jet: '48, 45, 45',
   },
   breakpoints: {
-    'mobile': '320px',
+    'mobile': '576px',
     'tablet': '768px',
     'desktop': '1024px',
     'xl': '1280px',

@@ -1,12 +1,18 @@
-import {Select, SelectArrow, SelectWrapper} from '../styles/Select.styles';
+import {
+  DoubleSelectContainer,
+  Select,
+  SelectArrow,
+  SelectWrapper1,
+  SelectWrapper2,
+} from '../styles/Select.styles';
 
-const CustomSelect = () => {
+const CustomSelect = ({firsttext, secondtext}) => {
   return (
-    <>
-      <SelectWrapper>
-        <Select>
+    <DoubleSelectContainer>
+      <SelectWrapper1>
+        <Select defaultValue={'placeholder'}>
           <option value='placeholder' disabled>
-            Filter By:
+            {firsttext}
           </option>
           <option>Types</option>
           <option>Abilities</option>
@@ -19,11 +25,11 @@ const CustomSelect = () => {
           <option>No damage to</option>
         </Select>
         <SelectArrow />
-      </SelectWrapper>
-      <SelectWrapper>
-        <Select>
+      </SelectWrapper1>
+      <SelectWrapper2>
+        <Select defaultValue={'placeholder'}>
           <option value='placeholder' disabled>
-            Filter By:
+            {secondtext}
           </option>
           <option>Types</option>
           <option>Abilities</option>
@@ -36,8 +42,8 @@ const CustomSelect = () => {
           <option>No damage to</option>
         </Select>
         <SelectArrow />
-      </SelectWrapper>
-    </>
+      </SelectWrapper2>
+    </DoubleSelectContainer>
   );
 };
 

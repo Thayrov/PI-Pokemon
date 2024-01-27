@@ -28,7 +28,9 @@ const strokeAnimation = keyframes`
 
 export const Wrapper = styled.div`
   width: 100%;
-  height: 100%;
+  height: 10rem;
+  background-color: rgba(${({theme: {colors}}) => colors.Jet}, 0.4);
+  border-radius: 10px;
   svg {
     width: 100%;
     height: 100%;
@@ -36,11 +38,12 @@ export const Wrapper = styled.div`
       animation: ${strokeAnimation} 5s 1;
       fill: #ef594f;
       stroke-width: 1;
-      font-size: 56px;
+      font-size: 40px;
       font-weight: 700;
-      text-align: start;
-      text-justify: start;
       transition: 0.3s ease all;
+      @media (min-width: ${({theme}) => theme.breakpoints.mobile}) {
+        font-size: 50px;
+      }
       @media (min-width: ${({theme}) => theme.breakpoints.tablet}) {
         font-size: 60px;
       }
