@@ -1,132 +1,55 @@
-import styled from 'styled-components';
+import {useEffect} from 'react';
 import Card from './Card';
+import {CardsContainer} from '../styles/Cards.styles';
+import {useSelector, useDispatch} from 'react-redux';
+import {getTypes, getTypesRelations} from '../redux/actions';
 
-const Cards = () => {
-  return (
-    <CardsContainer>
-      <Card
-        name='Bulbasaur'
-        id='001'
-        image='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1.png'
-        type='Grass/Poison'
-        icon='https://res.cloudinary.com/dhjlbf6xs/image/upload/v1705535603/pokemon/icons/grass_qfdkyx.svg'
-        backgroundImage='https://res.cloudinary.com/dhjlbf6xs/image/upload/v1705535693/pokemon/bg/Grass_Wallpaper_yk1dxc.png'
-        typeColor='#7AC74C'
-      />
-      <Card
-        name='Charmander'
-        id='004'
-        image='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/4.png'
-        type='Fire'
-        icon='https://res.cloudinary.com/dhjlbf6xs/image/upload/v1705535605/pokemon/icons/fire_wqrlq1.svg'
-        backgroundImage='https://res.cloudinary.com/dhjlbf6xs/image/upload/v1705535689/pokemon/bg/Fire_Wallpaper_txlojy.png'
-        typeColor='#EE8130'
-      />
-      <Card
-        name='Squirtle'
-        id='007'
-        image='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/7.png'
-        type='Water'
-        icon='https://res.cloudinary.com/dhjlbf6xs/image/upload/v1705535603/pokemon/icons/water_iwums9.svg'
-        backgroundImage='https://res.cloudinary.com/dhjlbf6xs/image/upload/v1705535689/pokemon/bg/Water_Wallpaper_qfaitu.png'
-        typeColor='#6390F0'
-      />{' '}
-      <Card
-        name='Bulbasaur'
-        id='001'
-        image='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1.png'
-        type='Grass/Poison'
-        icon='https://res.cloudinary.com/dhjlbf6xs/image/upload/v1705535603/pokemon/icons/grass_qfdkyx.svg'
-        backgroundImage='https://res.cloudinary.com/dhjlbf6xs/image/upload/v1705535693/pokemon/bg/Grass_Wallpaper_yk1dxc.png'
-        typeColor='#7AC74C'
-      />
-      <Card
-        name='Charmander'
-        id='004'
-        image='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/4.png'
-        type='Fire'
-        icon='https://res.cloudinary.com/dhjlbf6xs/image/upload/v1705535605/pokemon/icons/fire_wqrlq1.svg'
-        backgroundImage='https://res.cloudinary.com/dhjlbf6xs/image/upload/v1705535689/pokemon/bg/Fire_Wallpaper_txlojy.png'
-        typeColor='#EE8130'
-      />
-      <Card
-        name='Squirtle'
-        id='007'
-        image='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/7.png'
-        type='Water'
-        icon='https://res.cloudinary.com/dhjlbf6xs/image/upload/v1705535603/pokemon/icons/water_iwums9.svg'
-        backgroundImage='https://res.cloudinary.com/dhjlbf6xs/image/upload/v1705535689/pokemon/bg/Water_Wallpaper_qfaitu.png'
-        typeColor='#6390F0'
-      />{' '}
-      <Card
-        name='Bulbasaur'
-        id='001'
-        image='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1.png'
-        type='Grass/Poison'
-        icon='https://res.cloudinary.com/dhjlbf6xs/image/upload/v1705535603/pokemon/icons/grass_qfdkyx.svg'
-        backgroundImage='https://res.cloudinary.com/dhjlbf6xs/image/upload/v1705535693/pokemon/bg/Grass_Wallpaper_yk1dxc.png'
-        typeColor='#7AC74C'
-      />
-      <Card
-        name='Charmander'
-        id='004'
-        image='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/4.png'
-        type='Fire'
-        icon='https://res.cloudinary.com/dhjlbf6xs/image/upload/v1705535605/pokemon/icons/fire_wqrlq1.svg'
-        backgroundImage='https://res.cloudinary.com/dhjlbf6xs/image/upload/v1705535689/pokemon/bg/Fire_Wallpaper_txlojy.png'
-        typeColor='#EE8130'
-      />
-      <Card
-        name='Squirtle'
-        id='007'
-        image='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/7.png'
-        type='Water'
-        icon='https://res.cloudinary.com/dhjlbf6xs/image/upload/v1705535603/pokemon/icons/water_iwums9.svg'
-        backgroundImage='https://res.cloudinary.com/dhjlbf6xs/image/upload/v1705535689/pokemon/bg/Water_Wallpaper_qfaitu.png'
-        typeColor='#6390F0'
-      />{' '}
-      <Card
-        name='Bulbasaur'
-        id='001'
-        image='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1.png'
-        type='Grass/Poison'
-        icon='https://res.cloudinary.com/dhjlbf6xs/image/upload/v1705535603/pokemon/icons/grass_qfdkyx.svg'
-        backgroundImage='https://res.cloudinary.com/dhjlbf6xs/image/upload/v1705535693/pokemon/bg/Grass_Wallpaper_yk1dxc.png'
-        typeColor='#7AC74C'
-      />
-      <Card
-        name='Charmander'
-        id='004'
-        image='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/4.png'
-        type='Fire'
-        icon='https://res.cloudinary.com/dhjlbf6xs/image/upload/v1705535605/pokemon/icons/fire_wqrlq1.svg'
-        backgroundImage='https://res.cloudinary.com/dhjlbf6xs/image/upload/v1705535689/pokemon/bg/Fire_Wallpaper_txlojy.png'
-        typeColor='#EE8130'
-      />
-      <Card
-        name='Squirtle'
-        id='007'
-        image='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/7.png'
-        type='Water'
-        icon='https://res.cloudinary.com/dhjlbf6xs/image/upload/v1705535603/pokemon/icons/water_iwums9.svg'
-        backgroundImage='https://res.cloudinary.com/dhjlbf6xs/image/upload/v1705535689/pokemon/bg/Water_Wallpaper_qfaitu.png'
-        typeColor='#6390F0'
-      />
-    </CardsContainer>
-  );
+const Cards = ({startIndex, endIndex}) => {
+  const missingNoPokemon = {
+    id: '000',
+    name: 'MissingNo',
+    image:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/MissingNo.svg/800px-MissingNo.svg.png',
+    types: [
+      {
+        name: 'normal',
+        icon: 'https://res.cloudinary.com/dhjlbf6xs/image/upload/v1705536696/pokemon/icons/pokemon_icon_213976_yy8wzo.svg',
+        image:
+          'https://res.cloudinary.com/dhjlbf6xs/image/upload/v1705537375/pokemon/bg/White_Wallpaper_jcu1le.png',
+      },
+    ],
+    abilities: [{name: 'unknown'}],
+    moves: [{name: 'unknown'}],
+  };
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTypes());
+    dispatch(getTypesRelations());
+  }, [dispatch]);
+
+  const filteredPokemons = useSelector(state => state.filteredPokemons);
+  const pokemonOnFocus = useSelector(state => state.pokemonOnFocus);
+  const searchStatus = useSelector(state => state.searchStatus);
+
+  const pokemonsToShow = filteredPokemons.slice(startIndex, endIndex);
+
+  const renderContent = () => {
+    if (searchStatus === 'not_found') {
+      return <Card key='missingno' pokemon={missingNoPokemon} />;
+    } else if (searchStatus === 'error') {
+      return <div>Error fetching Pokémon</div>;
+    } else if (pokemonOnFocus.length > 0) {
+      return pokemonOnFocus.map(pokemon => <Card key={pokemon.id} pokemon={pokemon} />);
+    } else {
+      return pokemonsToShow
+        .filter(pokemon => pokemon !== null)
+        .map(pokemon => <Card key={pokemon.id} pokemon={pokemon} />);
+    }
+  };
+
+  return <CardsContainer>{renderContent()}</CardsContainer>;
 };
 
 export default Cards;
-
-const CardsContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 16px;
-  width: 100%;
-  min-height: 30rem;
-  padding: 20px;
-  background-color: rgba(${({theme: {colors}}) => colors.Jet}, 0.4);
-  border-radius: 10px;
-  overflow-y: scroll;
-`;

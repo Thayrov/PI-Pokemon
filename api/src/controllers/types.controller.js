@@ -1,5 +1,5 @@
 const axios = require('axios');
-const {Type} = require('../config/db.config');
+const {Type, Pokemon, TypeRelationship} = require('../config/db.config');
 const {API_URL} = require('../config/env.config');
 const {
   determineIconType,
@@ -36,4 +36,64 @@ const getTypes = async (req, res) => {
   }
 };
 
-module.exports = {getTypes};
+const getTypesByPokemonId = async (req, res) => {
+  try {
+    const {idPokemon} = req.params;
+    const pokemon = await Pokemon.findOne({
+      where: {id: idPokemon},
+      include: {
+        model: Type,
+        through: {attributes: []},
+      },
+    });
+
+    if (!pokemon) {
+      return res.status(404).send('Pokemon not found');
+    }
+    res.status(200).json(pokemon.Types);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
+const getTypesRelations = async (req, res) => {
+  try {
+    // Fetch types with their relationships
+    const typesWithRelations = await Type.findAll({
+      include: {
+        model: Type,
+        as: 'RelatedTypes',
+        through: {
+          model: TypeRelationship,
+          as: 'relationship',
+          attributes: ['relationshipType'],
+        },
+        attributes: ['id', 'name'],
+      },
+      attributes: ['id', 'name'],
+    });
+
+    // Transform data into a structured format
+    const formattedTypes = typesWithRelations.map(type => {
+      const relations = type.RelatedTypes.map(relatedType => ({
+        relatedTypeId: relatedType.id,
+        relatedTypeName: relatedType.name,
+        relationshipType: relatedType.relationship.relationshipType,
+      }));
+
+      return {
+        typeId: type.id,
+        typeName: type.name,
+        relations: relations,
+      };
+    });
+
+    res.status(200).json(formattedTypes);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
+module.exports = {getTypes, getTypesByPokemonId, getTypesRelations};

@@ -6,40 +6,57 @@ import {
   SelectWrapper2,
 } from '../styles/Select.styles';
 
-const CustomSelect = ({firsttext, secondtext}) => {
+const CustomSelect = ({
+  firsttext,
+  secondtext,
+  firstcontent,
+  secondcontent,
+  onFirstSelectChange,
+  onSecondSelectChange,
+  keyValue,
+}) => {
+  const handleFirstSelect = e => {
+    if (onFirstSelectChange) {
+      onFirstSelectChange(e.target.value);
+    }
+  };
+  const handleSecondSelect = e => {
+    if (onSecondSelectChange) {
+      onSecondSelectChange(e.target.value);
+    }
+  };
   return (
     <DoubleSelectContainer>
       <SelectWrapper1>
-        <Select defaultValue={'placeholder'}>
+        <Select defaultValue={'placeholder'} onChange={handleFirstSelect}>
           <option value='placeholder' disabled>
             {firsttext}
           </option>
-          <option>Types</option>
-          <option>Abilities</option>
-          <option>Source</option>
-          <option>Double damage from</option>
-          <option>Double damage to</option>
-          <option>Half damage from</option>
-          <option>Half damage to</option>
-          <option>No damage from</option>
-          <option>No damage to</option>
+          {firstcontent &&
+            firstcontent.length > 0 &&
+            firstcontent.map(option => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
         </Select>
         <SelectArrow />
       </SelectWrapper1>
-      <SelectWrapper2>
-        <Select defaultValue={'placeholder'}>
+      <SelectWrapper2 key={keyValue}>
+        <Select
+          defaultValue={'placeholder'}
+          onChange={handleSecondSelect}
+          disabled={!secondcontent.length}>
           <option value='placeholder' disabled>
             {secondtext}
           </option>
-          <option>Types</option>
-          <option>Abilities</option>
-          <option>Source</option>
-          <option>Double damage from</option>
-          <option>Double damage to</option>
-          <option>Half damage from</option>
-          <option>Half damage to</option>
-          <option>No damage from</option>
-          <option>No damage to</option>
+          {secondcontent &&
+            secondcontent.length > 0 &&
+            secondcontent.map(option => (
+              <option key={option} value={option.toLowerCase()}>
+                {option}
+              </option>
+            ))}
         </Select>
         <SelectArrow />
       </SelectWrapper2>

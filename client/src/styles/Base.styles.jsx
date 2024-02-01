@@ -83,6 +83,7 @@ export const BaseButton = styled.button`
   border: 1px solid #ef594f;
   background: #302d2d;
   box-shadow: 2px 2px 6px #302d2d;
+  font-variant: small-caps;
   animation: SlideTop 1s ease 0s infinite alternate none;
 
   @keyframes SlideTop {

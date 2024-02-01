@@ -9,24 +9,28 @@ const {
 const {processTypes} = require('../helpers/type.helper');
 const {API_URL} = require('../config/env.config');
 const axios = require('axios');
-const {Sequelize} = require('sequelize');
+const {Sequelize, Op} = require('sequelize');
 
 const getPokemons = async (req, res) => {
   try {
     const offset = parseInt(req.query.offset, 10) || 0;
     const limit = parseInt(req.query.limit, 10) || 12;
 
-    let data;
     const {count, rows: existingPokemons} = await Pokemon.findAndCountAll({
-      offset,
-      limit,
+      where: {
+        id: {
+          [Op.between]: [offset + 1, offset + limit],
+        },
+      },
       distinct: true,
+      order: [['id', 'ASC']],
     });
 
-    if (existingPokemons.length < limit) {
-      data = await getPokemonsFromAPI(offset, limit);
-    } else {
+    let data;
+    if (existingPokemons.length === limit) {
       data = await getPokemonsFromDB(offset, limit, count, existingPokemons);
+    } else {
+      data = await getPokemonsFromAPI(offset, limit);
     }
 
     res.status(200).json(data);
@@ -38,7 +42,7 @@ const getPokemons = async (req, res) => {
 
 const getPokemonDetail = async (req, res) => {
   try {
-    const idPokemon = req.params.idPokemon;
+    const {idPokemon} = req.params;
 
     let pokemon = await Pokemon.findOne({
       where: {id: idPokemon},
@@ -77,7 +81,7 @@ const getPokemonByName = async (req, res) => {
     let pokemons = await Pokemon.findAll({
       where: {
         name: {
-          [Sequelize.Op.iLike]: `%${name}%`,
+          [Sequelize.Op.iLike]: `${name}`,
         },
       },
     });
@@ -180,4 +184,84 @@ const createPokemon = async (req, res) => {
   }
 };
 
-module.exports = {getPokemons, getPokemonDetail, getPokemonByName, createPokemon};
+const updatePokemon = async (req, res) => {
+  try {
+    const {idPokemon} = req.params;
+    const {
+      name,
+      image,
+      hp,
+      attack,
+      special_attack,
+      defense,
+      special_defense,
+      speed,
+      height,
+      weight,
+      types,
+      abilities,
+      moves,
+    } = req.body;
+
+    let pokemon = await Pokemon.findOne({where: {id: idPokemon}});
+
+    if (!pokemon) {
+      return res.status(404).send('Pokemon not found');
+    }
+
+    await pokemon.update({
+      name,
+      image,
+      hp,
+      attack,
+      special_attack,
+      defense,
+      special_defense,
+      speed,
+      height,
+      weight,
+    });
+
+    if (types && types.length) {
+      await processTypes(types, pokemon);
+    }
+    if (abilities && abilities.length) {
+      await processAbilities(abilities, pokemon);
+    }
+    if (moves && moves.length) {
+      await processMoves(moves, pokemon);
+    }
+
+    res.status(200).json(pokemon);
+  } catch (error) {
+    console.error('Error updating Pokemon:', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
+const deletePokemon = async (req, res) => {
+  try {
+    const {idPokemon} = req.params;
+
+    let pokemon = await Pokemon.findOne({where: {id: idPokemon}});
+    if (!pokemon) {
+      return res.status(404).send('Pokemon not found');
+    }
+
+    await pokemon.destroy();
+
+    res.status(200).send('Pokemon deleted successfully');
+  } catch (error) {
+    console.error('Error deleting Pokemon:', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
+module.exports = {
+  getPokemons,
+  getPokemonDetail,
+  getPokemonByName,
+  createPokemon,
+  updatePokemon,
+  deletePokemon,
+};

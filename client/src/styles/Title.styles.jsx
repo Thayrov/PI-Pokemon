@@ -41,6 +41,8 @@ export const Wrapper = styled.div`
       font-size: 40px;
       font-weight: 700;
       transition: 0.3s ease all;
+      font-variant: small-caps;
+
       @media (min-width: ${({theme}) => theme.breakpoints.mobile}) {
         font-size: 50px;
       }

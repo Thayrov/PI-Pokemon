@@ -19,7 +19,7 @@ export const Select = styled.select`
   appearance: none;
   -webkit-appearance: none;
   width: 100%;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: bold;
   padding: 5px 10px;
   background-color: #302d2d;
@@ -29,14 +29,15 @@ export const Select = styled.select`
   cursor: pointer;
   outline: none;
   box-shadow: 2px 2px 6px 1px #40413f;
-  @media (min-width: ${({theme}) => theme.breakpoints.mobile}) {
-    font-size: 16px;
-  }
+  font-variant: small-caps;
   @media (min-width: ${({theme}) => theme.breakpoints.mobile}) {
     font-size: 15px;
   }
+  @media (min-width: ${({theme}) => theme.breakpoints.mobile}) {
+    font-size: 13px;
+  }
   @media (min-width: ${({theme}) => theme.breakpoints.desktop}) {
-    font-size: 18px;
+    font-size: 17px;
   }
   &:focus {
     color: #302d2d;

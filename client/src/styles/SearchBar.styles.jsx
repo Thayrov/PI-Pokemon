@@ -1,13 +1,15 @@
 import styled from 'styled-components';
 
-export const CustomInputContainer = styled.div`
+export const CustomInputContainer = styled.form`
   display: flex;
   align-items: center;
   position: relative;
-  /* min-width: 10rem; */
   width: 180px;
   max-width: 60rem;
   flex-grow: 1;
+  @media (min-width: ${({theme}) => theme.breakpoints.desktop}) {
+    min-width: 13rem;
+  }
 `;
 
 export const Input = styled.input`
@@ -58,7 +60,7 @@ export const SvgIcon = styled.svg`
   }
 
   @media (min-width: ${({theme}) => theme.breakpoints.desktop}) {
-    right: 35px;
+    right: 18px;
   }
 
   &:hover {

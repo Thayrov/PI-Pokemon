@@ -61,3 +61,8 @@ export const SelectContainer = styled.div`
     max-width: 540px;
   }
 `;
+
+export const ButtonsWrapper = styled.div`
+  display: flex;
+  gap: 10px;
+`;

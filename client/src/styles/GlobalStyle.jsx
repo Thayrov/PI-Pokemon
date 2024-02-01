@@ -24,6 +24,8 @@ const GlobalStyle = createGlobalStyle`
     rgba(${({theme: {colors}}) => colors.Jet}, 0.7) 5px,
     rgba(${({theme: {colors}}) => colors.Jet}, 0.7) 25px
   );
+  font-variant: small-caps;
+
   }
 
   /* Firefox */
