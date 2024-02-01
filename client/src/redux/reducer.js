@@ -31,8 +31,8 @@ import {
 const initialState = {
   pokemons: [],
   types: [],
-  filteredPokemons: [],
   abilities: [],
+  filteredPokemons: [],
   pokemonOnFocus: [],
   typesRelations: [],
   pagesLoaded: [],
