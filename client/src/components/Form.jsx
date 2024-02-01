@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import axios from 'axios';
 import {DEV_URL} from '../utils/consts';
 import Toast from './Toast';
@@ -15,12 +15,15 @@ import {
   Select,
   FormTitle,
 } from '../styles/Form.styles';
+import {getPokemonByName} from '../redux/actions';
 
 const PokemonForm = () => {
   const types = useSelector(state => state.types);
   const abilities = useSelector(state => state.abilities);
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
+
+  const dispatch = useDispatch();
 
   const displayToast = message => {
     setToastMessage(message);
@@ -68,7 +71,7 @@ const PokemonForm = () => {
     ];
     numericFields.forEach(field => {
       if (!formData[field]) {
-        tempErrors[field] = `El campo ${field} es requerido.`;
+        tempErrors[field] = `${field} is required.`;
       } else if (isNaN(formData[field]) || formData[field] < 0 || formData[field] > 100) {
         tempErrors[field] = `${field} must be a number between 0 and 100.`;
       }
@@ -101,6 +104,22 @@ const PokemonForm = () => {
       try {
         await axios.post(`${DEV_URL}/pokemons`, formData);
         displayToast('Pokemon created successfully!');
+        setFormData({
+          name: '',
+          image: '',
+          hp: '',
+          attack: '',
+          special_attack: '',
+          defense: '',
+          special_defense: '',
+          speed: '',
+          height: '',
+          weight: '',
+          types: [],
+          abilities: [],
+        });
+        setErrors({});
+        dispatch(getPokemonByName(formData.name));
       } catch (error) {
         displayToast('Error creating the Pokemon.');
       }
@@ -245,7 +264,7 @@ const PokemonForm = () => {
         </FormField>
 
         <SubmitButton type='submit'>Create pokemon</SubmitButton>
-        <GoBackButton type='button' location='/form' />
+        <GoBackButton />
       </Form>
 
       <Toast show={showToast} message={toastMessage} />

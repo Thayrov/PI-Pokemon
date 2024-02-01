@@ -5,6 +5,7 @@ export const PaginationContainer = styled.div`
   background-color: rgba(${({theme: {colors}}) => colors.BlackOlive}, 0.7);
   padding: 8px 10px;
   border-radius: 10px;
+  width: 100%;
 `;
 
 export const PaginationList = styled.ul`
@@ -31,15 +32,15 @@ export const PaginationList = styled.ul`
 
 export const PaginationItem = styled.li`
   display: inline;
-  margin: 0 3.9px;
+  margin: 0 3px;
   @media (min-width: ${({theme}) => theme.breakpoints.mobile}) {
-    margin: 0 5.15px;
+    margin: 0 3px;
   }
   @media (min-width: ${({theme}) => theme.breakpoints.tablet}) {
-    margin: 0 5px;
+    margin: 0 1px;
   }
   @media (min-width: ${({theme}) => theme.breakpoints.desktop}) {
-    margin: 0 12.3px;
+    margin: 0 7.6px;
   }
   &.disabled {
     opacity: 0.5;

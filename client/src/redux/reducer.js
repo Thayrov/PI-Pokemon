@@ -100,7 +100,7 @@ const reducer = (state = initialState, {type, payload}) => {
       return {
         ...state,
         pokemonOnFocus: pokemonOnFocusArray,
-        pokemons: updatedPokemons,
+        pokemons: [...state.pokemons, ...updatedPokemons],
         filteredPokemons: updatedFilteredPokemons,
         searchStatus: 'ok',
       };
@@ -120,7 +120,7 @@ const reducer = (state = initialState, {type, payload}) => {
 
       return {
         ...state,
-        filteredPokemons: filteredByType.length > 0 ? filteredByType : state.filteredPokemons, // Mantener el estado anterior si el filtro no encuentra coincidencias
+        filteredPokemons: filteredByType.length > 0 ? filteredByType : state.filteredPokemons,
         searchStatus: 'ok',
       };
     }

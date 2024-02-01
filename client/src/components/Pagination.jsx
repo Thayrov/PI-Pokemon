@@ -42,7 +42,7 @@ export const Pagination = ({totalItems, pageSize, currentPage, onChangePage}) =>
     } else if (width >= 576 && width < 768) {
       maxPagesToShow = 5;
     } else {
-      maxPagesToShow = 9;
+      maxPagesToShow = 10;
     }
 
     let startPage, endPage;
