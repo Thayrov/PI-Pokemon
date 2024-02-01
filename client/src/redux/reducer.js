@@ -100,7 +100,7 @@ const reducer = (state = initialState, {type, payload}) => {
       return {
         ...state,
         pokemonOnFocus: pokemonOnFocusArray,
-        pokemons: [...state.pokemons, ...updatedPokemons],
+        pokemons: updatedPokemons,
         filteredPokemons: updatedFilteredPokemons,
         searchStatus: 'ok',
       };
