@@ -1,5 +1,8 @@
 require('dotenv').config({
-  path: process.argv[2] === 'development' ? './.env.development' : './.env.production',
+  path:
+    process.argv[2] === 'development' || process.env.TEST_MODE === 'development'
+      ? './.env.development'
+      : './.env.production',
 });
 
 let environment = {MODE: process.env.TEST_MODE || process.argv[2]};

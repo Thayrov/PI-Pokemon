@@ -21,7 +21,7 @@ if (process.env.TEST_MODE === 'development' || process.argv[2] === 'development'
 }
 
 const sequelize = new Sequelize(DB_CONN_STRING, {
-  logging: console.log('Connected to DB...'),
+  logging: console.log('Connected to DB...', process.argv[2]),
   native: false,
   dialectOptions: dialectOptionsByEnv,
 });
