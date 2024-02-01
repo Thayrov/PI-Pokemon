@@ -38,8 +38,15 @@ import {
   sortPokemonsByWeight,
 } from '../redux/actions';
 import {Pagination} from './Pagination';
+import {useNavigate} from 'react-router-dom';
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  const handleOpenForm = () => {
+    navigate('/form');
+  };
+
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 12;
@@ -55,7 +62,6 @@ const Home = () => {
     dispatch(getPokemons(currentPage, pageSize));
   }, [currentPage, pageSize, dispatch]);
 
-  // Asegúrate de resetear a la primera página si se aplican filtros
   useEffect(() => {
     if (isFiltered) {
       setCurrentPage(1);
@@ -67,7 +73,9 @@ const Home = () => {
 
   const [selectedFilter, setSelectedFilter] = useState('');
   const [selectedSorter, setSelectedSorter] = useState('');
+  // eslint-disable-next-line no-unused-vars
   const [selectedSubcategory, setSelectedSubcategory] = useState('');
+  // eslint-disable-next-line no-unused-vars
   const [selectedSorterSubcategory, setSelectedSorterSubcategory] = useState('');
 
   const handleFilterChange = filter => {
@@ -240,7 +248,7 @@ const Home = () => {
             keyValue={selectedSorter}
           />
         </SelectContainer>
-        <TooltipContainer>
+        <TooltipContainer onClick={handleOpenForm}>
           <Button>+</Button>
           <TooltipText>Create</TooltipText>
         </TooltipContainer>

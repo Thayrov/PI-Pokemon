@@ -1,4 +1,4 @@
-const {Pokemon, Type, Ability, Move} = require('../config/db.config');
+const {Pokemon, Move} = require('../config/db.config');
 const {processAbilities} = require('../helpers/ability.helper');
 const {processMoves} = require('../helpers/move.helper');
 const {
@@ -32,6 +32,16 @@ const getPokemons = async (req, res) => {
     } else {
       data = await getPokemonsFromAPI(offset, limit);
     }
+    const customPokemons = await Pokemon.findAll({
+      where: {
+        id: {
+          [Op.gte]: 20000,
+        },
+      },
+      order: [['id', 'ASC']],
+    });
+
+    data.results = [...data.results, ...customPokemons];
 
     res.status(200).json(data);
   } catch (error) {

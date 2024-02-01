@@ -8,6 +8,7 @@ import {Landing} from './components/Landing.jsx';
 import {Routes, Route} from 'react-router-dom';
 import Home from './components/Home.jsx';
 import {AppContainer} from './styles/App.styles.jsx';
+import PokemonForm from './components/Form.jsx';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Landing />} />
           <Route path='/home' element={<Home />} />
+          <Route path='/form' element={<PokemonForm />} />
         </Routes>
       </AppContainer>
     </ThemeProvider>
