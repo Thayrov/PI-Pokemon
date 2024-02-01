@@ -87,12 +87,14 @@ const reducer = (state = initialState, {type, payload}) => {
     case GET_POKEMON_BY_NAME: {
       const pokemonOnFocusArray = Array.isArray(payload) ? payload : [payload];
 
-      const pokemonsMap = new Map(state.pokemons.map(pokemon => [pokemon.id, pokemon]));
+      const filteredPokemons = state.pokemons.filter(pokemon => pokemon !== null);
+      const pokemonsMap = new Map(filteredPokemons.map(pokemon => [pokemon.id, pokemon]));
       pokemonOnFocusArray.forEach(pokemon => pokemonsMap.set(pokemon.id, pokemon));
       const updatedPokemons = Array.from(pokemonsMap.values());
 
+      const filteredFilteredPokemons = state.filteredPokemons.filter(pokemon => pokemon !== null);
       const filteredPokemonsMap = new Map(
-        state.filteredPokemons.map(pokemon => [pokemon.id, pokemon]),
+        filteredFilteredPokemons.map(pokemon => [pokemon.id, pokemon]),
       );
       pokemonOnFocusArray.forEach(pokemon => filteredPokemonsMap.set(pokemon.id, pokemon));
       const updatedFilteredPokemons = Array.from(filteredPokemonsMap.values());
