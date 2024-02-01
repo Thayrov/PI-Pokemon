@@ -1,259 +1,96 @@
-![HenryLogo](https://d31uz8lwfmyn8g.cloudfront.net/Assets/logo-henry-white-lg.png)
+![Henry Logo](https://d31uz8lwfmyn8g.cloudfront.net/Assets/logo-henry-white-lg.png)
 
-# **POKEMON** | Proyecto Individual
+# Proyecto Individual: POKEMON
 
-## **📌 OBJETIVOS**
+## Índice
 
-- Construir una Single Page Application utlizando las tecnologías: **React**, **Redux**, **Node**, **Express** y **Sequelize**.
-- Poner en práctica recursos básicos de estilos y diseño (UX : UI).
-- Afirmar y conectar los conceptos aprendidos en la carrera.
-- Aprender mejores prácticas.
-- Aprender y practicar el workflow de GIT.
-- Utilizar y practicar testing.
+- [Proyecto Individual: POKEMON](#proyecto-individual-pokemon)
+  - [Índice](#índice)
+  - [Introducción](#introducción)
+  - [Objetivos](#objetivos)
+  - [Duración](#duración)
+  - [Funcionalidades Principales](#funcionalidades-principales)
+  - [Estructura del Proyecto](#estructura-del-proyecto)
+    - [Cliente (Frontend)](#cliente-frontend)
+    - [API (Backend)](#api-backend)
+  - [Instrucciones de Instalación y Ejecución](#instrucciones-de-instalación-y-ejecución)
+  - [Herramientas y Tecnologías Utilizadas](#herramientas-y-tecnologías-utilizadas)
+  - [Agradecimientos](#agradecimientos)
+  - [Licencia](#licencia)
 
-<br />
+## Introducción
 
----
+Este proyecto fue desarrollado como parte del bootcamp de Henry, con el objetivo de construir una aplicación web que permita a los usuarios interactuar con la data de Pokémon a través de la [PokeAPI](https://pokeapi.co/). Este proyecto pone a prueba las habilidades adquiridas en React, Redux, Node, Express y Sequelize, implementando prácticas de diseño y desarrollo web moderno.
 
-## **⏱ HORARIOS Y FECHAS**
+## Objetivos
 
-El proyecto individual tiene una duración máxima de tres semanas. Se inicia la primera semana con un Kick-Off, y se agendará una corrección personalizada la última semana.
+- Construir una Single Page Application (SPA) utilizando React para el frontend y Node junto con Express en el backend.
+- Utilizar Sequelize como ORM para interactuar con la base de datos PostgreSQL.
+- Implementar Redux para manejar el estado de la aplicación.
+- Diseñar e implementar una interfaz de usuario amigable y accesible.
+- Integrar pruebas de software para asegurar la calidad y funcionalidad de la aplicación.
+- Practicar y mejorar el flujo de trabajo utilizando GIT.
 
-En el caso de completar todas las tareas antes de dicho lapso se podrá avisar a su instructor para coordinar una fecha de presentación del trabajo (DEMO).
+## Duración
 
-<br />
+El proyecto tiene una duración máxima de tres semanas, comenzando con un Kick-Off y finalizando con una presentación demostrativa del trabajo realizado.
 
----
+## Funcionalidades Principales
 
-## **⚠️ IMPORTANTE**
+- **Buscar Pokémons**: Permite a los usuarios buscar pokémons por nombre o ID a través de la PokeAPI.
+- **Visualización de Información**: Los usuarios pueden ver detalles específicos de cada pokémon, incluyendo estadísticas, habilidades y más.
+- **Filtrado y Ordenado**: La aplicación ofrece opciones para filtrar pokémons por tipo, habilidades, entre otros, además de ordenarlos según diferentes criterios.
+- **Creación de Pokémons**: Los usuarios pueden añadir nuevos pokémons a la base de datos, completando un formulario con la información requerida.
 
-Es necesario contar minimamente con la última versión estable de NodeJS y NPM. Asegúrate de contar con ella para poder instalar correctamente las dependecias necesarias para correr el proyecto. Actualmente las versiónes necesarias son:
+## Estructura del Proyecto
 
-- **Node**: 12.18.3 o mayor
-- **NPM**: 6.14.16 o mayor
+El proyecto se divide en dos partes principales: el **cliente** (frontend) y la **API** (backend), cada uno con su propia estructura de carpetas y archivos necesarios para su funcionamiento.
 
-Para verificar que versión tienes instalada:
+### Cliente (Frontend)
+
+Desarrollado con React y Redux, implementa llamadas a la API para mostrar y gestionar los datos de pokémons. Incluye componentes para la búsqueda, filtrado, visualización y creación de pokémons.
+
+### API (Backend)
+
+Construido con Node, Express y Sequelize. Se encarga de interactuar con la base de datos PostgreSQL para realizar operaciones CRUD sobre los pokémons, además de servir los datos necesarios al cliente.
+
+## Instrucciones de Instalación y Ejecución
+
+1. **Clonar el repositorio**:
 
 ```bash
-node -v
-npm -v
+  git clone https://github.com/Thayrov/PI-Pokemon.git
 ```
 
-**ACLARACIÓN:** las dependencias actuales se encuentran en las versiones que venimos trabajando durante el bootcamp.
+2. **Instalación de dependencias**:
 
-- **react**: 17.0.1
-- **react-dom**: 17.0.1
-- **react-router-dom**: 5.2.0
-- **redux**: 4.0.5
-- **react-redux**: 7.2.3
+- Backend (API):
+  ```
+  cd api
+  npm install
+  ```
+- Frontend (Cliente):
+  ```
+  cd client
+  npm install
+  ```
 
-Está permitido, **bajo tu responsabilidad**, actualizar las dependencias a versiones más actuales si lo deseas. Versiones mas actuales podrían presentar configuraciones diferentes respecto a las versiones en las que venimos trabajando durante el bootcamp.
+## Herramientas y Tecnologías Utilizadas
 
-### **⛔️ Está rotundamente prohibido utilizar librerías externas para aplicar estilos a la SPA. Tendrás que utilizar CSS mediante algunas de las opciones vistas en el bootcamp (CSS, Legacy, Inline Styling, CSS Modules o Styled Components).**
+- Frontend: React, Redux, Vite, Styled Components
+- Backend: Node.js, Express, Sequelize, PostgreSQL
+- Testing: Jest
+- Otros: ESLint, Babel, Axios
 
-<br />
+## Agradecimientos
 
----
+Quisiera expresar mi gratitud a los creadores de los siguientes CodePen, cuyas ideas e implementaciones fueron una fuente de inspiración para el desarrollo de componentes en este proyecto:
 
-## **📋 PARA COMENZAR...**
+- [Loader Animation by rss](https://codepen.io/rss/pen/nyVddp)
+- [Pikachu CSS Art by lichin-lin](https://codepen.io/lichin-lin/pen/ZOoGvx)
+- [Pure CSS Pokeball by kai-wu](https://codepen.io/kai-wu/pen/xxKgzdr)
+- [CSS Loader by trulymittal](https://codepen.io/trulymittal/pen/LMOJWv)
 
-1. Deberás forkear este repositorio para tener una copia del mismo en tu cuenta personal de GitHub.
+## Licencia
 
-2. Clona el repositorio en tu computadora para comenzar a trabajar. Este repositorio contiene un **`BoilerPlate`** con la estructura general del proyecto, tanto del servidor como del cliente. El boilerplate cuenta con dos carpetas: **`api`** y **`client`**. En estas carpetas estará el código del back-end y el front-end respectivamente.
-
-3. En la carpeta **`api`** deberás crear un archivo llamado: **`.env`** que tenga la siguiente forma:
-
-   ```env
-       DB_USER=usuariodepostgres
-       DB_PASSWORD=passwordDePostgres
-       DB_HOST=localhost
-   ```
-
-4. Reemplazar **`usuariodepostgres`** y **`passwordDePostgres`** con tus propias credenciales para conectarte a postgres. Este archivo va ser ignorado en la subida a github, ya que contiene información sensible (las credenciales).
-
-5. Adicionalmente será necesario que crees, **desde psql (shell o PGAdmin)**, una base de datos llamada **`pokemon`**. Si no realizas este paso de manera manual no podrás avanzar con el proyecto.
-
-<br />
-
----
-
-## **📖 ENUNCIADO GENERAL**
-
-La idea de este proyecto es construir una aplicación web a partir de la API [**pokeapi**](https://pokeapi.co/) en la que se pueda:
-
-- Buscar pokemones.
-- Visualizar la información de los pokemones.
-- Filtrarlos.
-- Ordenarlos.
-- Crear nuevos pokemones.
-
-⚠️ Para las funcionalidades de filtrado y ordenamiento NO se puede utilizar los endpoints de la API externa que ya devuelven los resultados filtrados u ordenados.
-
-### **Únicos end-points que se pueden utilizar**
-
-- [**PokeApi**](https://pokeapi.co/api/v2/pokemon)
-- **Por id**: _"https://pokeapi.co/api/v2/pokemon/{id}"_
-- **Por nombre**: _"https://pokeapi.co/api/v2/pokemon/{name}"_
-- **Por tipo**: _"https://pokeapi.co/api/v2/type"_
-
-<br />
-
----
-
-<div align="center">
-
-## **📁 INSTRUCCIONES**
-
-</div>
-
-<br />
-
-### **🖱 BASE DE DATOS**
-
-Deberás crear dos modelos para tu base de datos. Una será para los pokemones y la otra será para los tipos de pokemones (pueden llevar el nombre que tu quieras). La relación entre ambos modelos debe ser de muchos a muchos. A continuación te dejamos las propiedades que debe tener cada modelo. Aquellas marcadas con un asterísco son obligatorias.
-
-**📍 MODELO 1 | Pokemons**
-
-- ID. \*
-- Nombre. \*
-- Imagen. \*
-- Vida. \*
-- Ataque. \*
-- Defensa. \*
-- Velocidad.
-- Altura.
-- Peso.
-
-<br />
-
-**📍 MODELO 2 | Type**
-
-- ID. \*
-- Nombre. \*
-
-<br />
-
----
-
-<br />
-
-### **🖱 BACK-END**
-
-Para esta parte deberás construir un servidor utilizando **NodeJS** y **Express**. Tendrás que conectarlo con tu base de datos mediante **Sequelize**.
-
-Tu servidor deberá contar con las siguientes rutas:
-
-#### **📍 GET | /pokemons**
-
-- Obtiene un arreglo de objetos, donde cada objeto es un pokemon con su información.
-
-#### **📍 GET | /pokemons/:idPokemon**
-
-- Esta ruta obtiene el detalle de un pokemon específico. Es decir que devuelve un objeto con la información pedida en el detalle de un pokemon.
-- El pokemon es recibido por parámetro (ID).
-- Tiene que incluir los datos del tipo de pokemon al que está asociado.
-- Debe funcionar tanto para los pokemones de la API como para los de la base de datos.
-
-#### **📍 GET | /pokemons/name?="..."**
-
-- Esta ruta debe obtener todos aquellos pokemons que coinciden con el nombre recibido por query.
-- Debe poder buscarlo independientemente de mayúsculas o minúsculas.
-- Si no existe el pokemon, debe mostrar un mensaje adecuado.
-- Debe buscar tanto los de la API como los de la base de datos.
-
-#### **📍 POST | /pokemons**
-
-- Esta ruta recibirá todos los datos necesarios para crear un pokemon y relacionarlo con sus tipos solicitados.
-- Toda la información debe ser recibida por body.
-- Debe crear un pokemon en la base de datos, y este debe estar relacionado con sus tipos indicados (debe poder relacionarse al menos con dos).
-
-#### **📍 GET | /types**
-
-- Obtiene un arreglo con todos los tipos de pokemones.
-- En una primera instancia, cuando la base de datos este vacía, deberás guardar todos los tipos que encuentres en la API.
-- Estos deben ser obtenidos de la API (se evaluará que no haya hardcodeo). Luego de obtenerlos de la API, deben ser guardados en la base de datos para su posterior consumo desde allí.
-
-<br />
-
----
-
-<br />
-
-### **🖱 FRONT-END**
-
-Se debe desarrollar una aplicación utilizando **React** y **Redux** que contenga las siguientes vistas:
-
-**📍 LANDING PAGE |** deberás crear una página de inicio o bienvenida con:
-
-- Alguna imagen de fondo representativa al proyecto.
-- Botón para ingresar a la **`home page`**.
-
-<br />
-
-**📍 HOME PAGE |** la página principal de tu SPA debe contener:
-
-- SearchBar: un input de búsqueda para encontrar pokemon por nombre. La búsqueda debe ser exacta, por lo que sólo lo encontrará si se lo busca con su nombre completo.
-- Sector en el que se vea un listado de cards con los pokemones. Al iniciar deberá cargar los primeros resultados obtenidos desde la ruta **`GET /pokemons`** y deberá mostrar su:
-  - Imagen.
-  - Nombre.
-  - Tipos.
-- Cuando se le hace click a una Card deberá redirigir al detalle de ese pokemon específico.
-- Botones/Opciones para **filtrar** por tipo, y por si su origen es de la API o de la base de datos (creados por nosotros desde el formulario).
-- Botones/Opciones para **ordenar** tanto ascendentemente como descendentemente los pokemones por orden alfabético y por ataque.
-- Paginado: el listado de pokemones se hará por partes. Tu SPA debe contar con un paginado que muestre un total de 12 pokemones por página.
-
-<br />
-
-**📍 DETAIL PAGE |** en esta vista se deberá mostrar toda la información específica de un pokemon:
-
-- ID.
-- Nombre.
-- Imagen.
-- Vida.
-- Ataque.
-- Defensa.
-- Velocidad (si tiene).
-- Altura (si tiene).
-- Peso (si tiene).
-- Tipo.
-
-<br />
-
-**📍 FORM PAGE |**: en esta vista se encontrará el formulario para crear un nuevo pokemon.
-
-Este formulario debe ser **controlado completamente con JavaScritp**. No se pueden utilizar validaciones HTML, ni utilizar librerías especiales para esto. Debe contar con los siguientes campos:
-
-- Nombre.
-- Imagen.
-- Vida.
-- Ataque.
-- Defensa.
-- Velocidad (si tiene).
-- Altura (si tiene).
-- Peso (si tiene).
-- Posibilidad de seleccionar/agregar varios tipos en simultáneo.
-- Botón para crear el nuevo pokemon.
-
-> [**IMPORANTE**]: es requisito que el formulario de creación esté validado sólo con JavaScript. Puedes agregar las validaciones que consideres. Por ejemplo: que el nombre del pokemon no pueda contener números, o que la defensa no pueda exceder determinado valor, etc.
-
-<br />
-
----
-
-<br />
-
-### **🖱 TESTING**
-
-Ten en cuenta que en esta instancia no es obligatorio el desarrollo de testing para tu aplicación. De igual manera, te desafiamos a que los hagas, ¡ya que suman puntos!
-
-- Al menos tener un componente del frontend con sus tests respectivos.
-- Al menos tener dos rutas del backend con sus tests respectivos.
-- Al menos tener un modelo de la base de datos con sus tests respectivos.
-
-<br />
-
----
-
-<br />
-
-<img src="./docs/img/pokemon.png" alt="" />
+Este proyecto está bajo la licencia MIT. Consulte el archivo [LICENSE](LICENSE) para obtener más detalles.
