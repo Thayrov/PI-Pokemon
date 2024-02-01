@@ -251,7 +251,7 @@ export const LetterSpan = styled.span`
   position: absolute;
   width: 100%;
   height: 100%;
-  top: ${({top}) => top};
+  top: ${({$top}) => $top};
   left: 0;
   overflow: hidden;
 

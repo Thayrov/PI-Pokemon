@@ -4,10 +4,17 @@ import axios from 'axios';
 import {DEV_URL} from '../utils/consts';
 import Toast from './Toast';
 import {GoBackButton} from './GoBackButton';
-import {ErrorMsg, FormContainer, FormField, Label, SubmitButton} from '../styles/Form.styles';
-import {Form} from 'react-router-dom';
-import {Input} from '../styles/SearchBar.styles';
-import {Select} from '../styles/Select.styles';
+import {
+  ErrorMsg,
+  FormContainer,
+  FormField,
+  Label,
+  SubmitButton,
+  Form,
+  Input,
+  Select,
+  FormTitle,
+} from '../styles/Form.styles';
 
 const PokemonForm = () => {
   const types = useSelector(state => state.types);
@@ -40,13 +47,13 @@ const PokemonForm = () => {
   const validate = () => {
     let tempErrors = {};
     if (!formData.name) {
-      tempErrors.name = 'El nombre es requerido.';
+      tempErrors.name = 'Name is required.';
     } else if (/[^a-zA-Z\s]/.test(formData.name)) {
-      tempErrors.name = 'El nombre solo debe contener letras.';
+      tempErrors.name = 'Name must only contain letters.';
     }
 
     if (!formData.image) {
-      tempErrors.image = 'La imagen es requerida.';
+      tempErrors.image = 'Image is required.';
     }
 
     const numericFields = [
@@ -63,16 +70,16 @@ const PokemonForm = () => {
       if (!formData[field]) {
         tempErrors[field] = `El campo ${field} es requerido.`;
       } else if (isNaN(formData[field]) || formData[field] < 0 || formData[field] > 100) {
-        tempErrors[field] = `El campo ${field} debe ser un número entre 0 y 100.`;
+        tempErrors[field] = `${field} must be a number between 0 and 100.`;
       }
     });
 
     if (!formData.types || formData.types.length === 0) {
-      tempErrors.types = 'Debe seleccionar al menos un tipo.';
+      tempErrors.types = 'Must select at least one type.';
     }
 
     if (!formData.abilities || formData.abilities.length === 0) {
-      tempErrors.abilities = 'Debe seleccionar al menos una habilidad.';
+      tempErrors.abilities = 'Must select at least one ability.';
     }
 
     setErrors(tempErrors);
@@ -92,42 +99,40 @@ const PokemonForm = () => {
     e.preventDefault();
     if (validate()) {
       try {
-        const response = await axios.post(`${DEV_URL}/pokemons`, formData);
-        console.log('Respuesta del servidor:', response.data);
-        displayToast('Pokemon creado con éxito!');
+        await axios.post(`${DEV_URL}/pokemons`, formData);
+        displayToast('Pokemon created successfully!');
       } catch (error) {
-        console.error('Error al enviar datos al servidor:', error);
-        displayToast('Error al crear el Pokemon.');
+        displayToast('Error creating the Pokemon.');
       }
     } else {
-      console.log('Errores en el formulario:', errors);
-      displayToast('Por favor, corrige los errores del formulario.');
+      displayToast('Please correct the form errors.');
     }
   };
 
   return (
     <FormContainer>
+      <FormTitle>Create your pokemon</FormTitle>
       <Form onSubmit={handleSubmit}>
         <FormField>
-          <Label htmlFor='name'>Nombre:</Label>
+          <Label htmlFor='name'>Name:</Label>
           <Input id='name' name='name' value={formData.name} onChange={handleChange} />
           {errors.name && <ErrorMsg>{errors.name}</ErrorMsg>}
         </FormField>
 
         <FormField>
-          <Label htmlFor='image'>Imagen:</Label>
+          <Label htmlFor='image'>Image:</Label>
           <Input id='image' name='image' value={formData.image} onChange={handleChange} />
           {errors.image && <ErrorMsg>{errors.image}</ErrorMsg>}
         </FormField>
 
         <FormField>
-          <Label htmlFor='hp'>Vida:</Label>
+          <Label htmlFor='hp'>Hp:</Label>
           <Input id='hp' name='hp' type='number' value={formData.hp} onChange={handleChange} />
           {errors.hp && <ErrorMsg>{errors.hp}</ErrorMsg>}
         </FormField>
 
         <FormField>
-          <Label htmlFor='attack'>Ataque:</Label>
+          <Label htmlFor='attack'>Attack:</Label>
           <Input
             id='attack'
             name='attack'
@@ -139,7 +144,7 @@ const PokemonForm = () => {
         </FormField>
 
         <FormField>
-          <Label htmlFor='special_attack'>Ataque Especial:</Label>
+          <Label htmlFor='special_attack'>Special Attack:</Label>
           <Input
             id='special_attack'
             name='special_attack'
@@ -163,7 +168,7 @@ const PokemonForm = () => {
         </FormField>
 
         <FormField>
-          <Label htmlFor='special_defense'>Defensa Especial:</Label>
+          <Label htmlFor='special_defense'>Special Defense:</Label>
           <Input
             id='special_defense'
             name='special_defense'
@@ -175,7 +180,7 @@ const PokemonForm = () => {
         </FormField>
 
         <FormField>
-          <Label htmlFor='speed'>Velocidad:</Label>
+          <Label htmlFor='speed'>Speed:</Label>
           <Input
             id='speed'
             name='speed'
@@ -187,7 +192,7 @@ const PokemonForm = () => {
         </FormField>
 
         <FormField>
-          <Label htmlFor='height'>Altura:</Label>
+          <Label htmlFor='height'>Height:</Label>
           <Input
             id='height'
             name='height'
@@ -199,7 +204,7 @@ const PokemonForm = () => {
         </FormField>
 
         <FormField>
-          <Label htmlFor='weight'>Peso:</Label>
+          <Label htmlFor='weight'>Weight:</Label>
           <Input
             id='weight'
             name='weight'
@@ -211,7 +216,7 @@ const PokemonForm = () => {
         </FormField>
 
         <FormField>
-          <Label htmlFor='types'>Tipos:</Label>
+          <Label htmlFor='types'>Types:</Label>
           <Select multiple id='types' name='types' value={formData.types} onChange={handleChange}>
             {types.map(type => (
               <option key={type.id} value={type.name}>
@@ -223,7 +228,7 @@ const PokemonForm = () => {
         </FormField>
 
         <FormField>
-          <Label htmlFor='abilities'>Habilidades:</Label>
+          <Label htmlFor='abilities'>Abilities:</Label>
           <Select
             multiple
             id='abilities'
@@ -239,7 +244,7 @@ const PokemonForm = () => {
           {errors.abilities && <ErrorMsg>{errors.abilities}</ErrorMsg>}
         </FormField>
 
-        <SubmitButton type='submit'>Crear Pokemon</SubmitButton>
+        <SubmitButton type='submit'>Create pokemon</SubmitButton>
         <GoBackButton type='button' location='/form' />
       </Form>
 

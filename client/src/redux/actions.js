@@ -40,8 +40,6 @@ export const SORT_POKEMONS_BY_SPEED = 'SORT_POKEMONS_BY_SPEED';
 export const SORT_POKEMONS_BY_HEIGHT = 'SORT_POKEMONS_BY_HEIGHT';
 export const SORT_POKEMONS_BY_WEIGHT = 'SORT_POKEMONS_BY_WEIGHT';
 
-export const UPDATE_PAGES_LOADED = 'UPDATE_PAGES_LOADED';
-
 // Action Creators
 
 export const reset = () => {

@@ -26,7 +26,7 @@ export const fadeout = keyframes`
 `;
 
 export const ToastContainer = styled.div`
-  visibility: ${props => (props.show ? 'visible' : 'hidden')};
+  visibility: ${props => (props.$show === 'true' ? 'visible' : 'hidden')};
   max-width: 500px;
   min-width: 50px;
   background-color: #333;
