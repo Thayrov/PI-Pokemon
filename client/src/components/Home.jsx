@@ -39,9 +39,11 @@ import {
 } from '../redux/actions';
 import {Pagination} from './Pagination';
 import {useNavigate} from 'react-router-dom';
+import Loader from './Loader';
 
 const Home = () => {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleOpenForm = () => {
     navigate('/form');
@@ -59,7 +61,10 @@ const Home = () => {
   const totalItems = isFiltered ? pokemons.length : 908;
 
   useEffect(() => {
-    dispatch(getPokemons(currentPage, pageSize));
+    setIsLoading(true);
+    dispatch(getPokemons(currentPage, pageSize)).finally(() => {
+      setIsLoading(false);
+    });
   }, [currentPage, pageSize, dispatch]);
 
   useEffect(() => {
@@ -253,11 +258,7 @@ const Home = () => {
           <TooltipText>Create</TooltipText>
         </TooltipContainer>
       </SearchBarWrapper>
-      {pokemons.length < endIndex ? (
-        <div>Cargando...</div>
-      ) : (
-        <Cards startIndex={startIndex} endIndex={endIndex} />
-      )}
+      {isLoading ? <Loader /> : <Cards startIndex={startIndex} endIndex={endIndex} />}
 
       <Pagination
         totalItems={totalItems}
