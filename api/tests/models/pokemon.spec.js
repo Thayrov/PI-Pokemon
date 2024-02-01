@@ -17,6 +17,7 @@ describe('Pokemon model', () => {
   test('Should create a new Pokemon', async () => {
     const newPokemon = await Pokemon.create({
       name: 'Pikachu',
+      image: 'http://example.com/pikachu.png',
       hp: 35,
       attack: 55,
       defense: 40,
@@ -36,14 +37,40 @@ describe('Pokemon model', () => {
   });
 
   test('Should update a Pokemon', async () => {
-    let pikachu = await Pokemon.create({name: 'Pikachu', hp: 35});
+    const pikachuData = {
+      name: 'Pikachu',
+      image: 'http://example.com/pikachu.png',
+      hp: 35,
+      attack: 55,
+      special_attack: 50,
+      defense: 40,
+      special_defense: 50,
+      speed: 90,
+      height: 4,
+      weight: 60,
+    };
+
+    let pikachu = await Pokemon.create(pikachuData);
     pikachu = await pikachu.update({hp: 45});
 
     expect(pikachu.hp).toBe(45);
   });
 
   test('Should delete a Pokemon', async () => {
-    const pikachu = await Pokemon.create({name: 'Pikachu', hp: 35});
+    const pikachuData = {
+      name: 'Pikachu',
+      image: 'http://example.com/pikachu.png',
+      hp: 35,
+      attack: 55,
+      special_attack: 50,
+      defense: 40,
+      special_defense: 50,
+      speed: 90,
+      height: 4,
+      weight: 60,
+    };
+
+    const pikachu = await Pokemon.create(pikachuData);
     await pikachu.destroy();
 
     const foundPokemon = await Pokemon.findByPk(pikachu.id);
