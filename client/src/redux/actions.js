@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {DEV_URL} from '../utils/consts';
+const VITE_API_URL = import.meta.env.VITE_API_URL;
 
 // Action Types
 export const RESET = 'RESET';
@@ -51,7 +51,7 @@ export const reset = () => {
 export const getTypes = () => {
   return async function (dispatch) {
     try {
-      const {data} = await axios.get(`${DEV_URL}/types`);
+      const {data} = await axios.get(`${VITE_API_URL}/types`);
       return dispatch({
         type: GET_TYPES,
         payload: data,
@@ -65,7 +65,7 @@ export const getTypes = () => {
 export const getTypesRelations = () => {
   return async function (dispatch) {
     try {
-      const {data} = await axios.get(`${DEV_URL}/types/relations`);
+      const {data} = await axios.get(`${VITE_API_URL}/types/relations`);
       return dispatch({
         type: GET_TYPES_RELATIONS,
         payload: data,
@@ -92,18 +92,18 @@ export const getPokemons = (page, pageSize) => {
       try {
         const {
           data: {results},
-        } = await axios.get(`${DEV_URL}/pokemons?limit=${pageSize}&offset=${startIndex}`);
+        } = await axios.get(`${VITE_API_URL}/pokemons?limit=${pageSize}&offset=${startIndex}`);
 
         const pokemonsWithTypesAndAbilitiesPromises = results.map(async pokemon => {
-          const typesResponse = await axios.get(`${DEV_URL}/types/${pokemon.id}`);
+          const typesResponse = await axios.get(`${VITE_API_URL}/types/${pokemon.id}`);
           const sortedTypes = typesResponse.data.sort((a, b) => a.name.localeCompare(b.name));
 
-          const abilitiesResponse = await axios.get(`${DEV_URL}/abilities/${pokemon.id}`);
+          const abilitiesResponse = await axios.get(`${VITE_API_URL}/abilities/${pokemon.id}`);
           const sortedAbilities = abilitiesResponse.data.sort((a, b) =>
             a.name.localeCompare(b.name),
           );
 
-          const movesResponse = await axios.get(`${DEV_URL}/moves/${pokemon.id}`);
+          const movesResponse = await axios.get(`${VITE_API_URL}/moves/${pokemon.id}`);
           const sortedMoves = movesResponse.data.sort((a, b) => a.name.localeCompare(b.name));
 
           return {...pokemon, types: sortedTypes, abilities: sortedAbilities, moves: sortedMoves};
@@ -125,16 +125,16 @@ export const getPokemons = (page, pageSize) => {
 export const getPokemonById = id => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`${DEV_URL}/pokemon/${id}`);
+      const response = await axios.get(`${VITE_API_URL}/pokemon/${id}`);
       if (response.status === 200) {
         const {data} = response;
-        const typesResponse = await axios.get(`${DEV_URL}/types/${data.id}`);
+        const typesResponse = await axios.get(`${VITE_API_URL}/types/${data.id}`);
         const sortedTypes = typesResponse.data.sort((a, b) => a.name.localeCompare(b.name));
 
-        const abilitiesResponse = await axios.get(`${DEV_URL}/abilities/${data.id}`);
+        const abilitiesResponse = await axios.get(`${VITE_API_URL}/abilities/${data.id}`);
         const sortedAbilities = abilitiesResponse.data.sort((a, b) => a.name.localeCompare(b.name));
 
-        const movesResponse = await axios.get(`${DEV_URL}/moves/${data.id}`);
+        const movesResponse = await axios.get(`${VITE_API_URL}/moves/${data.id}`);
         const sortedMoves = movesResponse.data.sort((a, b) => a.name.localeCompare(b.name));
 
         let pokemonsWithTypesAndAbilities = {
@@ -161,18 +161,18 @@ export const getPokemonById = id => {
 export const getPokemonByName = name => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`${DEV_URL}/pokemons/name?name=${name}`);
+      const response = await axios.get(`${VITE_API_URL}/pokemons/name?name=${name}`);
 
       if (response.status === 200 && response.data.length > 0) {
         const {data} = response;
 
-        const typesResponse = await axios.get(`${DEV_URL}/types/${data[0].id}`);
+        const typesResponse = await axios.get(`${VITE_API_URL}/types/${data[0].id}`);
         const sortedTypes = typesResponse.data.sort((a, b) => a.name.localeCompare(b.name));
 
-        const abilitiesResponse = await axios.get(`${DEV_URL}/abilities/${data[0].id}`);
+        const abilitiesResponse = await axios.get(`${VITE_API_URL}/abilities/${data[0].id}`);
         const sortedAbilities = abilitiesResponse.data.sort((a, b) => a.name.localeCompare(b.name));
 
-        const movesResponse = await axios.get(`${DEV_URL}/moves/${data[0].id}`);
+        const movesResponse = await axios.get(`${VITE_API_URL}/moves/${data[0].id}`);
         const sortedMoves = movesResponse.data.sort((a, b) => a.name.localeCompare(b.name));
 
         let pokemonsWithTypesAndAbilities = {

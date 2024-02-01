@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import axios from 'axios';
-import {DEV_URL} from '../utils/consts';
+
 import Toast from './Toast';
 import {GoBackButton} from './GoBackButton';
 import {
@@ -16,6 +16,7 @@ import {
   FormTitle,
 } from '../styles/Form.styles';
 import {getPokemonByName} from '../redux/actions';
+const VITE_API_URL = import.meta.env.VITE_API_URL;
 
 const PokemonForm = () => {
   const types = useSelector(state => state.types);
@@ -102,7 +103,7 @@ const PokemonForm = () => {
     e.preventDefault();
     if (validate()) {
       try {
-        await axios.post(`${DEV_URL}/pokemons`, formData);
+        await axios.post(`${VITE_API_URL}/pokemons`, formData);
         displayToast('Pokemon created successfully!');
         setFormData({
           name: '',
