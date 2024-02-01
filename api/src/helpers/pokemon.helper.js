@@ -23,7 +23,7 @@ const getPokemonsFromAPI = async (offset, limit) => {
             where: {
               id: detailedData.id,
               name: detailedData.name,
-              image: detailedData.sprites.other.home.front_default,
+              image: detailedData.sprites.other.showdown.front_default,
               hp: detailedData.stats[0].base_stat,
               attack: detailedData.stats[1].base_stat,
               special_attack: detailedData.stats[3].base_stat,
@@ -69,7 +69,7 @@ const formatPokemonData = data => {
   return {
     id: data.id,
     name: data.name,
-    image: data.sprites.other.home.front_default,
+    image: data.sprites.other.showdown.front_default,
     hp: data.stats[0].base_stat,
     attack: data.stats[1].base_stat,
     special_attack: data.stats[3].base_stat,

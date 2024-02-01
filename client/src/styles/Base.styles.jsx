@@ -16,7 +16,7 @@ export const theme = {
     Jet: '48, 45, 45',
   },
   breakpoints: {
-    'mobile': '320px',
+    'mobile': '576px',
     'tablet': '768px',
     'desktop': '1024px',
     'xl': '1280px',
@@ -73,7 +73,35 @@ export const FlexColumnCenter = css`
 /* ############## BASE COMPONENTS ############## */
 
 export const BaseButton = styled.button`
+  font-weight: bold;
+  color: #ef594f !important;
+  font-size: 12px;
+  cursor: pointer;
+  text-align: center;
+  padding: 4px 11px 4px 10px;
+  border-radius: 5px;
+  border: 1px solid #ef594f;
+  background: #302d2d;
+  box-shadow: 2px 2px 6px #302d2d;
+  font-variant: small-caps;
+  animation: SlideTop 1s ease 0s infinite alternate none;
+
+  @keyframes SlideTop {
+    0% {
+      transform: translateY(2px);
+    }
+
+    100% {
+      transform: translateY(-2px);
+    }
+  }
+
   &:hover {
+    background: #e2e3e4;
+  }
+
+  &:active {
+    transform: scale(0.9);
   }
 `;
 
