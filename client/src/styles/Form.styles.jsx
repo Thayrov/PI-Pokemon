@@ -13,6 +13,12 @@ export const FormContainer = styled.div`
   max-height: 100vh;
 `;
 
+export const FormTitle = styled.h1`
+  color: rgba(${({theme: {colors}}) => colors.Bittersweet}, 1);
+  font-size: 2rem;
+  margin-bottom: 10px;
+`;
+
 export const Form = styled.form`
   display: grid;
   grid-template-columns: repeat(2, 1fr);

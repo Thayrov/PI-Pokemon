@@ -25,7 +25,6 @@ import {
   SORT_POKEMONS_BY_S_ATK,
   SORT_POKEMONS_BY_S_DEF,
   SORT_POKEMONS_BY_WEIGHT,
-  UPDATE_PAGES_LOADED,
 } from './actions';
 
 const initialState = {
@@ -83,11 +82,6 @@ const reducer = (state = initialState, {type, payload}) => {
         pokemonOnFocus: [],
       };
     }
-    case UPDATE_PAGES_LOADED:
-      return {
-        ...state,
-        pagesLoaded: [...new Set([...state.pagesLoaded, payload])],
-      };
 
     case GET_POKEMON_BY_ID:
     case GET_POKEMON_BY_NAME: {
@@ -185,7 +179,6 @@ const reducer = (state = initialState, {type, payload}) => {
         ?.relations.filter(relation => relation.relationshipType === 'double_damage_from')
         .map(relation => relation.relatedTypeName);
 
-      // Ignorar los pokemons que son null
       const filteredByDoubleDamageTo = state.pokemons.filter(
         pokemon =>
           pokemon !== null && pokemon.types.some(type => affectedTypeNames.includes(type.name)),
@@ -204,7 +197,6 @@ const reducer = (state = initialState, {type, payload}) => {
           ?.relations.filter(relation => relation.relationshipType === 'half_damage_to')
           .map(relation => relation.relatedTypeName) || [];
 
-      // Ignorar los pokemons que son null
       const filteredPokemons = state.pokemons.filter(
         pokemon => pokemon !== null && pokemon.types.some(type => relatedTypes.includes(type.name)),
       );
@@ -222,7 +214,6 @@ const reducer = (state = initialState, {type, payload}) => {
           ?.relations.filter(relation => relation.relationshipType === 'half_damage_from')
           .map(relation => relation.relatedTypeName) || [];
 
-      // Ignorar los pokemons que son null
       const filteredPokemons = state.pokemons.filter(
         pokemon => pokemon !== null && pokemon.types.some(type => relatedTypes.includes(type.name)),
       );
@@ -240,7 +231,6 @@ const reducer = (state = initialState, {type, payload}) => {
           ?.relations.filter(relation => relation.relationshipType === 'no_damage_to')
           .map(relation => relation.relatedTypeName) || [];
 
-      // Ignorar los pokemons que son null
       const filteredPokemons = state.pokemons.filter(
         pokemon => pokemon !== null && pokemon.types.some(type => relatedTypes.includes(type.name)),
       );
@@ -258,7 +248,6 @@ const reducer = (state = initialState, {type, payload}) => {
           ?.relations.filter(relation => relation.relationshipType === 'no_damage_from')
           .map(relation => relation.relatedTypeName) || [];
 
-      // Ignorar los pokemons que son null
       const filteredPokemons = state.pokemons.filter(
         pokemon => pokemon !== null && pokemon.types.some(type => relatedTypes.includes(type.name)),
       );

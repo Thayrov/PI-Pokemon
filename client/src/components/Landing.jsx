@@ -43,7 +43,7 @@ export const Landing = () => {
             <PokemonBall className='pokemon-ball'></PokemonBall>
             <StyledLink>
               Pokemon
-              <LetterSpan top='0' color='#ef594f' transform='100%' data-letters='Go!'></LetterSpan>
+              <LetterSpan $top='0' color='#ef594f' transform='100%' data-letters='Go!'></LetterSpan>
               <LetterSpan
                 top='5%'
                 color='#f6f7f8'

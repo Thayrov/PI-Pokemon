@@ -12,7 +12,6 @@ const getTypes = async (req, res) => {
     const response = await axios.get(`${API_URL}/type`);
     const apiTypes = response.data.results;
 
-    // Procesar y crear tipos
     const typesPromises = apiTypes.map(async type => {
       const [typeInstance] = await Type.findOrCreate({
         where: {name: type.name},
@@ -59,7 +58,6 @@ const getTypesByPokemonId = async (req, res) => {
 
 const getTypesRelations = async (req, res) => {
   try {
-    // Fetch types with their relationships
     const typesWithRelations = await Type.findAll({
       include: {
         model: Type,
@@ -74,7 +72,6 @@ const getTypesRelations = async (req, res) => {
       attributes: ['id', 'name'],
     });
 
-    // Transform data into a structured format
     const formattedTypes = typesWithRelations.map(type => {
       const relations = type.RelatedTypes.map(relatedType => ({
         relatedTypeId: relatedType.id,
