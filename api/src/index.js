@@ -22,7 +22,7 @@ const {conn} = require('./config/db.config.js');
 const {PORT} = require('./config/env.config');
 
 conn
-  .sync({force: true})
+  .sync({force: false})
   .then(() => {
     app.listen(PORT, () => {
       console.log(`Server raised in: http://localhost:${PORT}`);
